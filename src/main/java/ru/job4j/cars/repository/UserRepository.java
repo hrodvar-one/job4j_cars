@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import ru.job4j.cars.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +56,10 @@ public class UserRepository {
         Session session = sf.openSession();
         try {
             session.beginTransaction();
-            session.delete(findById(userId));
+            session.createQuery(
+                            "DELETE User WHERE id = :fId")
+                    .setParameter("fId", userId)
+                    .executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -67,8 +71,9 @@ public class UserRepository {
      * @return список пользователей.
      */
     public List<User> findAllOrderById() {
-
-        return List.of();
+        Session session = sf.openSession();
+        Query<User> query = session.createQuery("from User ORDER BY id ASC", User.class);
+        return query.getResultList();
     }
 
     /**
@@ -96,7 +101,16 @@ public class UserRepository {
      * @return список пользователей.
      */
     public List<User> findByLikeLogin(String key) {
-        return List.of();
+        List<User> users = new ArrayList<>();
+        try (Session session = sf.openSession()) {
+            Query<User> query = session.createQuery(
+                    "from User u where lower(u.login) like lower(:login)", User.class);
+            query.setParameter("login", "%" + key.toLowerCase() + "%");
+            users = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
     /**
