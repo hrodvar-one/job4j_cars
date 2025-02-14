@@ -48,12 +48,10 @@ public class UserRepository {
         try {
             tx = session.beginTransaction();
 
-            Query<?> query = session.createQuery("update User u set u.login = :newLogin where u.id = :id");
-
-            query.setParameter("newLogin", user.getLogin());
-            query.setParameter("id", user.getId());
-
-            query.executeUpdate();
+            session.createQuery("update User u set u.login = :newLogin where u.id = :id")
+                    .setParameter("newLogin", user.getLogin())
+                    .setParameter("id", user.getId())
+                    .executeUpdate();
 
             tx.commit();
         } catch (Exception e) {
@@ -76,9 +74,10 @@ public class UserRepository {
         try {
             tx = session.beginTransaction();
 
-            Query<?> query = session.createQuery("delete from User u where u.id = :id");
-            query.setParameter("id", userId);
-            query.executeUpdate();
+            session.createQuery("delete from User u where u.id = :id")
+                    .setParameter("id", userId)
+                    .executeUpdate();
+
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
