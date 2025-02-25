@@ -30,4 +30,12 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PriceHistory> priceHistories = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = @JoinColumn(name = "auto_post_id"),
+            inverseJoinColumns = @JoinColumn(name = "auto_user_id")
+    )
+    private List<User> subscribers = new ArrayList<>();
 }
