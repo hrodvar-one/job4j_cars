@@ -24,11 +24,6 @@ public class Car {
     @JoinColumn(name = "engine_id", referencedColumnName = "id", unique = true)
     private Engine engine;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "history_owners",
-            joinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    )
-    private Set<Owner> owners = new HashSet<>();
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<HistoryOwner> historyOwners = new HashSet<>();
 }
