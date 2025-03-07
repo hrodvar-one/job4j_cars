@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Table(name = "price_history")
 @Getter
 @Setter
-
 public class PriceHistory {
 
     @Id
