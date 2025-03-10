@@ -26,4 +26,8 @@ public class Car {
 
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HistoryOwner> historyOwners = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id", nullable = false)
+    private Brand brand;
 }

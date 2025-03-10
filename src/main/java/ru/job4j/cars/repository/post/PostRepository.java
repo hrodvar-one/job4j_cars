@@ -6,7 +6,6 @@ import ru.job4j.cars.model.Post;
 import ru.job4j.cars.repository.CrudRepository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +34,19 @@ public class PostRepository {
      * @return список объявлений.
      */
     public List<Post> getAllPostsWithPhoto() {
-        return new ArrayList<>();
+
+        return crudRepository.query(
+                "SELECT p FROM Post p WHERE SIZE(p.photos) > 0 ORDER BY p.id DESC",
+                Post.class
+        );
+    }
+
+    public List<Post> getAllPostsWithSpecificCarBrand(String brand) {
+
+        return crudRepository.query(
+                "SELECT p FROM Post p WHERE p.car.brand = :brand ORDER BY p.id DESC",
+                Post.class,
+                Map.of("brand", brand)
+        );
     }
 }

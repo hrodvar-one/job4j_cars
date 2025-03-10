@@ -2,8 +2,9 @@ package ru.job4j.cars.model;
 
 import javax.persistence.*;
 
-@Entity(name = "car_brand")
-public class CarBrand {
+@Entity
+@Table(name = "brands")
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
