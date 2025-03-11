@@ -41,12 +41,17 @@ public class PostRepository {
         );
     }
 
-    public List<Post> getAllPostsWithSpecificCarBrand(String brand) {
+    /**
+     * Получить все объявления с определенной маркой авто.
+     * @param brandName имя брэнда авто.
+     * @return список объявлений.
+     */
+    public List<Post> getAllPostsWithSpecificCarBrand(String brandName) {
 
         return crudRepository.query(
-                "SELECT p FROM Post p WHERE p.car.brand = :brand ORDER BY p.id DESC",
+                "SELECT p FROM Post p WHERE p.car.brand.name = :brandName ORDER BY p.id DESC",
                 Post.class,
-                Map.of("brand", brand)
+                Map.of("brandName", brandName)
         );
     }
 }
