@@ -1,10 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "history_owners")
+@Getter
+@Setter
 public class HistoryOwner {
 
     @Id
