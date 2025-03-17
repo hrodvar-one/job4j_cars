@@ -30,12 +30,12 @@ public class EngineRepository {
         );
     }
 
-    public void save(Engine engine) {
-        crudRepository.run(session -> session.save(engine));
+    public void saveEngine(Engine engine) {
+        crudRepository.run(session -> session.persist(engine));
     }
 
     public void update(Engine engine) {
-        crudRepository.run(session -> session.update(engine));
+        crudRepository.run(session -> session.merge(engine));
     }
 
     public void deleteEngineById(int id) {

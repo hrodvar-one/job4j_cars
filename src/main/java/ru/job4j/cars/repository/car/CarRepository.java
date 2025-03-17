@@ -30,11 +30,11 @@ public class CarRepository {
         );
     }
 
-    public void save(Car car) {
+    public void saveCar(Car car) {
         crudRepository.run(session -> session.save(car));
     }
 
-    public void update(Car car) {
+    public void updateCar(Car car) {
         crudRepository.run(session -> session.update(car));
     }
 

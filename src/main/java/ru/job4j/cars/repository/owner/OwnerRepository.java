@@ -30,11 +30,11 @@ public class OwnerRepository {
         );
     }
 
-    public void save(Owner owner) {
+    public void saveOwner(Owner owner) {
         crudRepository.run(session -> session.save(owner));
     }
 
-    public void update(Owner owner) {
+    public void updateOwner(Owner owner) {
         crudRepository.run(session -> session.update(owner));
     }
 
