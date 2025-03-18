@@ -38,7 +38,7 @@ public class HistoryOwnerRepository {
      * @param id ID историй владения.
      * @return История владения автомобилем по ID. Если не найдена, то Optional.empty().
      */
-    public Optional<HistoryOwner> getHistoryOwnerById(Integer id) {
+    public Optional<HistoryOwner> getHistoryOwnerById(Long id) {
         return crudRepository.optional(
                 "select ho from HistoryOwner ho where ho.id = :fId", HistoryOwner.class,
                 Map.of("fId", id)

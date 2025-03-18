@@ -74,7 +74,6 @@ class CarRepositoryTest {
         car.setBrand(brand);
         car.setEngine(engine);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         session = sf.openSession();
@@ -104,7 +103,6 @@ class CarRepositoryTest {
         car.setName("Test Car");
 
         Exception exception = assertThrows(Exception.class, () -> {
-//            carRepository.save(car);
             carRepository.saveCar(car);
         });
 
@@ -135,7 +133,6 @@ class CarRepositoryTest {
         car.setBrand(brand);
         car.setEngine(engine);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         Optional<Car> savedCar = carRepository.getCarById(car.getId());
@@ -151,7 +148,7 @@ class CarRepositoryTest {
     public void whenGetCarByIdThenReturnNull() {
         Optional<Car> savedCar = carRepository.getCarById(-1);
 
-        assertFalse(savedCar.isPresent(), "Car should not be present in the database");
+        assertFalse(savedCar.isPresent(), "Car should not be present in the database.");
     }
 
     /**
@@ -188,11 +185,8 @@ class CarRepositoryTest {
         car2.setBrand(brand2);
         car3.setBrand(brand3);
 
-//        carRepository.save(car1);
         carRepository.saveCar(car1);
-//        carRepository.save(car2);
         carRepository.saveCar(car2);
-//        carRepository.save(car3);
         carRepository.saveCar(car3);
 
         List<Car> cars = carRepository.getAllCars();
@@ -235,7 +229,6 @@ class CarRepositoryTest {
         car.setName("Test Car");
         car.setBrand(brand1);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         Optional<Car> savedCarOptional = carRepository.getCarById(car.getId());
@@ -246,7 +239,6 @@ class CarRepositoryTest {
         savedCar.setName("Updated Test Car");
         savedCar.setBrand(brand2);
 
-//        carRepository.update(savedCar);
         carRepository.updateCar(savedCar);
 
         Optional<Car> updatedCarOptional = carRepository.getCarById(car.getId());
@@ -278,7 +270,6 @@ class CarRepositoryTest {
         car.setName("Test Car");
         car.setBrand(brand);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         Optional<Car> savedCarOptional = carRepository.getCarById(car.getId());
@@ -293,7 +284,6 @@ class CarRepositoryTest {
         nonExistentCar.setBrand(brand);
 
         assertThrows(Exception.class, () -> {
-//            carRepository.update(nonExistentCar);
             carRepository.updateCar(nonExistentCar);
         }, "Updating a non-existent Car should throw an exception");
 
@@ -324,7 +314,6 @@ class CarRepositoryTest {
         car.setName("Test Car");
         car.setBrand(brand);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         Optional<Car> savedCarOptional = carRepository.getCarById(car.getId());
@@ -360,7 +349,6 @@ class CarRepositoryTest {
         car.setName("Test Car");
         car.setBrand(brand);
 
-//        carRepository.save(car);
         carRepository.saveCar(car);
 
         Optional<Car> savedCarOptional = carRepository.getCarById(car.getId());

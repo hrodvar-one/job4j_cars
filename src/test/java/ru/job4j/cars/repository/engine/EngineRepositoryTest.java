@@ -103,7 +103,7 @@ class EngineRepositoryTest {
         engine.setName("V8");
         engineRepository.saveEngine(engine);
 
-        Integer nonExistentId = 999;
+        int nonExistentId = 999;
         Optional<Engine> foundEngine = engineRepository.getEngineById(nonExistentId);
 
         assertThat(foundEngine).isEmpty();
@@ -245,7 +245,7 @@ class EngineRepositoryTest {
 
         Engine savedEngine = savedEngineOptional.get();
 
-        Integer nonExistentId = 999;
+        int nonExistentId = 999;
         engineRepository.deleteEngineById(nonExistentId);
 
         Optional<Engine> deletedEngineOptional = engineRepository.getEngineById(savedEngine.getId());
