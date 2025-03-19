@@ -8,12 +8,40 @@ import ru.job4j.cars.repository.CrudRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
 public class PostRepository {
 
     private final CrudRepository crudRepository;
+
+    /**
+     * Сохранить пост
+     * @param post передаем новый пост
+     */
+    public void savePost(Post post) {
+        crudRepository.run(session -> session.persist(post));
+    }
+
+    /**
+     * Получить Post по id
+     */
+    public Optional<Post> getPostById(Long id) {
+        return crudRepository.optional(
+                "select p from Post p where p.id = :id", Post.class,
+                Map.of("id", id));
+    }
+
+    /**
+     * Получить все объявления.
+     */
+    public List<Post> getAllPosts() {
+        return crudRepository.query(
+                "FROM Post",
+                Post.class
+        );
+    }
 
     /**
      * Получить все объявления за последний день.
@@ -52,6 +80,23 @@ public class PostRepository {
                 "SELECT p FROM Post p WHERE p.car.brand.name = :brandName ORDER BY p.id DESC",
                 Post.class,
                 Map.of("brandName", brandName)
+        );
+    }
+
+    /**
+     * Обновить Post.
+     */
+    public void updatePost(Post post) {
+        crudRepository.run(session -> session.merge(post));
+    }
+
+    /**
+     * Удалить Post.
+     */
+    public void deletePostById(Long id) {
+        crudRepository.run(
+                "DELETE FROM Post p WHERE p.id = :id",
+                Map.of("id", id)
         );
     }
 }
